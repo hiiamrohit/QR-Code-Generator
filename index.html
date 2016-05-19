@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Create QR Code</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <style>
+  body {
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+}
+  </style>
+</head>
+<body>
+<div>
+<h1>QR Code Generator</h1>
+<p>Simple and fast online program to embed your text in image and create QR Code. </p>
+
+<div>
+		<p>Text to embed in QR Code</p>
+		<p><textarea name="txt" style="height:50px;width:350px;" required="required"></textarea></p>
+		
+		<p>Image Size : <select name="size">
+			<option value="100x100">100x100</option>
+			<option value="200x200">200x200</option>
+			<option value="300x300" selected>300x300</option>
+			<option value="400x400">400x400</option>
+			<option value="500x500">500x500</option>
+			<option value="600x600">600x600</option>
+			<option value="700x700">700x700</option>
+			<option value="800x800">800x800</option>
+		</select></p>
+		<p><input type="submit" value="Generator QR Code" id="qr-gn"></p>
+</div>
+
+<br/>
+<div id="qrcode"></div>
+
+<p>Created by <a href="http://www.iamrohit.in">Rohit Kumar</a></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+<script>
+
+
+  $(function(){
+       $("#qr-gn").click(function(){
+       	   $("#qrcode").html("");
+           var txt = $.trim($('textarea[name="txt"]').val());
+           if(txt == '') {
+       	   	 alert("Please enter text you want to embed in OR Code");
+       	   	 return false;
+       	   }
+           var size = $('select[name="size"]').val();
+           var sizeSplit = size.split('x');
+           var width = sizeSplit[0];
+           var height = sizeSplit[1];
+           generateQRcode(width, height, txt );
+           return false;
+       });
+      
+	  function generateQRcode(width, height, text) {
+	  	 $('#qrcode').qrcode({width: width,height: height,text: text});
+	  }
+      
+  });
+
+  
+</script>
+
+</body>
+</html>
